@@ -2,8 +2,8 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
-String agAdi = "Deneme";                      //Kablosuz Ağ adını buraya yazıyoruz.    
-String agSifresi = "deneme321";                              //Ağ şifresini buraya yazıyoruz.
+String agAdi = " Wifi Ağınızın Adı ";                      //Kablosuz Ağ adını buraya yazıyoruz.    
+String agSifresi = " Wifi Şifresi ";                              //Ağ şifresini buraya yazıyoruz.
 
 int rxPin = 10;                                               //ESP8266 TX pini
 int txPin = 11;                                               //ESP8266 RX pini
