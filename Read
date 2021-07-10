@@ -1,0 +1,9 @@
+ ESP8266 - ARDUİNO
+ 
+     GND - GND
+     TXD - 10PWM
+     RXD - 11PWM
+   CH-PD - 3.3V
+     VCC - 3.3V (Be careful)
+     
+İf it doesn't work you can use 16V 100uF Capacitor     
