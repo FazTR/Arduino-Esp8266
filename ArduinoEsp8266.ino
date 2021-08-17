@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>                                   //Gerekli kütüphaneleri ekliyoruz.
 #include <Wire.h>
-#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
 
 String agAdi = " Wifi Ağınızın Adı ";                      //Kablosuz Ağ adını buraya yazıyoruz.    
 String agSifresi = " Wifi Şifresi ";                              //Ağ şifresini buraya yazıyoruz.
@@ -15,11 +15,11 @@ String ip = "184.106.153.149";                                //Thingspeak sites
 
 
 SoftwareSerial esp(rxPin, txPin);                             //Seri haberleşme için pin ayarlarını yapıyoruz.
-LiquidCrystal_I2C lcd(0x27, 16, 2);                           //(ekranın adresi, sütun sayısı, satır sayısı)
+LiquidCrystal lcd(12, 8, 5, 4, 3, 2);                           //(ekranın adresi, sütun sayısı, satır sayısı)
 
 
 void setup() {  
-  lcd.begin();                                                //LCD ekranı başlatıyoruz
+  lcd.begin(16, 2);                                              //LCD ekranı başlatıyoruz
   Serial.begin(9600);                                         //Seri port haberleşmesini başlattık
   Serial.println("Başlatılıyor");
   //esp.begin(115200);                                        //ESP8266 ile seri haberleşmeyi başlatıyoruz.İlk çalıştırmada 115200 sonra 9600 yapıcaz
@@ -44,8 +44,8 @@ void setup() {
   Serial.println("Ağa Bağlanıldı.");
   delay(1000);
 
-  lcd.clear();                                                 //LCD ekranı temizledik
-  lcd.home();                                                  //Kursörü başa aldık
+  lcd.clear();                                                 //LCD ekranı temizledik  
+  lcd.setCursor(0, 1);
 }
 
 
@@ -55,7 +55,7 @@ void loop() {
     Serial.println("AT+CIPSTART Error");
   }
   lcd.home(); 
-  lcd.print("ALTIN CANLI GR");
+  lcd.print("Altın Fiyatı");
   lcd.setCursor(4, 1);
   Serial.print(altin());                                    
   Serial.println("Baglantı Kapatildi.");
