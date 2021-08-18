@@ -2,7 +2,7 @@
 #include <Wire.h>
 #include <LiquidCrystal.h>
 
-String agAdi = " Wifi Ağınızın Adı ";                      //Kablosuz Ağ adını buraya yazıyoruz.    
+String agAdi = " Wifi Ağ Adı ";                      //Kablosuz Ağ adını buraya yazıyoruz.    
 String agSifresi = " Wifi Şifresi ";                              //Ağ şifresini buraya yazıyoruz.
 
 int rxPin = 10;                                               //ESP8266 TX pini
@@ -15,7 +15,7 @@ String ip = "184.106.153.149";                                //Thingspeak sites
 
 
 SoftwareSerial esp(rxPin, txPin);                             //Seri haberleşme için pin ayarlarını yapıyoruz.
-LiquidCrystal lcd(12, 8, 5, 4, 3, 2);                           //(ekranın adresi, sütun sayısı, satır sayısı)
+LiquidCrystal lcd(12, 9, 5, 4, 3, 2);                           //(ekranın adresi, sütun sayısı, satır sayısı)
 
 
 void setup() {  
@@ -54,10 +54,11 @@ void loop() {
   if(esp.find("Error")){                                      //Bağlantı hatası kontrolü yapıyoruz.
     Serial.println("AT+CIPSTART Error");
   }
-  lcd.home(); 
-  lcd.print("Altın Fiyatı");
-  lcd.setCursor(4, 1);
-  Serial.print(altin());                                    
+  lcd.home();
+  lcd.setCursor(5,0);
+  lcd.print("Baslik");
+  lcd.setCursor(5, 1);
+  lcd.print(deger());                                    
   Serial.println("Baglantı Kapatildi.");
   esp.println("AT+CIPCLOSE");                                //Bağlantıyı kapatıyoruz
   delay(1000); 
@@ -90,7 +91,7 @@ String Time()
   
 }
 
-String altin()
+String deger()
 {
 
  
@@ -104,15 +105,15 @@ String altin()
   hostt += "\r\n";
   hostt += "Host:api.thingspeak.com";
   hostt += "\r\n\r\n\r\n\r\n\r\n";
-  String Altin = sendData(hostt, 2000, 1);  // GET request ( GET /apps/thinghttp/send_request?api_key=XXXXXXXXXXXXXXXX 
-                                            //               Host: Host_server_name ) 
+  String deger = sendData(hostt, 2000, 1);  
+                                           
   
   
 /********************** gelen verinin içinden sadece ilgili bölümü alıyoruz. ****************************/
- int baslangic=Altin.indexOf(':');
- Altin=Altin.substring(baslangic+1,baslangic+9);
+ int baslangic=deger.indexOf(':');
+ deger=deger.substring(baslangic+1,baslangic+7);
 
-  return (Altin);
+  return (deger);
 
   
 }
